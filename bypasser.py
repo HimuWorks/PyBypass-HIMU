@@ -183,7 +183,7 @@ def tnlink(url):
 
 def moneycase(url):
     client = requests.session()
-    DOMAIN = "https://last.moneycase.link"
+    DOMAIN = "https://last.moneycase.link/"
     url = url[:-1] if url[-1] == '/' else url
     code = url.split("/")[-1]
     final_url = f"{DOMAIN}/{code}"
@@ -194,7 +194,7 @@ def moneycase(url):
     inputs = soup.find_all("input")
     data = { input.get('name'): input.get('value') for input in inputs }
     h = { "x-requested-with": "XMLHttpRequest" }
-    time.sleep(5)
+    time.sleep(12)
     r = client.post(f"{DOMAIN}/links/go", data=data, headers=h)
     try:
         return r.json()['url']
