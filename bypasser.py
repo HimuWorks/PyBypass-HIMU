@@ -179,6 +179,29 @@ def tnlink(url):
 
 
 ###############################################################
+# moneycase
+
+def moneycase(url):
+    client = requests.session()
+    DOMAIN = "https://last.moneycase.link"
+    url = url[:-1] if url[-1] == '/' else url
+    code = url.split("/")[-1]
+    final_url = f"{DOMAIN}/{code}"
+    ref = "https://www.infokeeda.xyz/"
+    h = {"referer": ref}
+    resp = client.get(final_url,headers=h)
+    soup = BeautifulSoup(resp.content, "html.parser")
+    inputs = soup.find_all("input")
+    data = { input.get('name'): input.get('value') for input in inputs }
+    h = { "x-requested-with": "XMLHttpRequest" }
+    time.sleep(5)
+    r = client.post(f"{DOMAIN}/links/go", data=data, headers=h)
+    try:
+        return r.json()['url']
+    except: return "Something went wrong :("
+	
+
+###############################################################
 # psa 
 
 def try2link_bypass(url):
@@ -2303,6 +2326,12 @@ def shortners(url):
     elif "https://adrinolinks." in url:
         print("entered adrinolink: ",url)
         return adrinolink(url)
+
+    # moneycase
+    elif "https://pdisk.site" in url:
+	print("entered moneycase: ",url)
+        return moneycase(url)
+      
     
     # tnlink
     elif "https://link.tnlink.in/" in url:
