@@ -177,8 +177,8 @@ def tnlink(url):
     try: return r.json()['url']
     except: return "Something went wrong :("
 
+##############################################################
 
-###############################################################
 # moneycase
 
 def moneycase(url):
@@ -199,7 +199,6 @@ def moneycase(url):
     try:
         return r.json()['url']
     except: return "Something went wrong :("
-	
 
 ###############################################################
 # psa 
@@ -2233,6 +2232,11 @@ def shortners(url):
         print("entered flashlink: ",url)
         return flashl(url)
 
+    # moneycase
+    elif "https://pdisk.site" in url:
+        print("entered moneycase link: ",url)
+        return moneycase(url)
+
     # short2url
     elif "https://short2url.in/" in url:
         print("entered short2url: ",url)
@@ -2326,12 +2330,6 @@ def shortners(url):
     elif "https://adrinolinks." in url:
         print("entered adrinolink: ",url)
         return adrinolink(url)
-
-    # moneycase
-    elif "https://pdisk.site" in url:
-	print("entered moneycase: ",url)
-        return moneycase(url)
-      
     
     # tnlink
     elif "https://link.tnlink.in/" in url:
